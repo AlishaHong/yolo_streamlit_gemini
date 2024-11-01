@@ -51,6 +51,7 @@ if "chat_session" not in st.session_state:
 
 
 
+# 과거 채팅 메시지를 출력 + 화면 업데이트시에 새로 출력
 # 세션에서도 아바타가 유지되도록 추가 
 for content in st.session_state.chat_session.history:
     # AI와 사용자를 구분하여 다른 아바타를 적용
