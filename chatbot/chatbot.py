@@ -4,6 +4,15 @@ import streamlit as st
 from dotenv import load_dotenv
 import os
 
+
+# 현재 디렉토리 설정
+HOME = os.getcwd()
+
+# 아바타 이미지 경로 설정
+ai_avatar_path = os.path.join(HOME, 'ai.jpg')
+user_avatar_path = os.path.join(HOME, 'dog.jpg')
+
+print(user_avatar_path)
 # 라이브러리 설명
 # google.generativeai: Google Generative AI 라이브러리 - ai 모델 사용
 # dotenv :.env 파일에서 환경변수를 로드
@@ -56,16 +65,16 @@ if "chat_session" not in st.session_state:
 for content in st.session_state.chat_session.history:
     # AI와 사용자를 구분하여 다른 아바타를 적용
     if content.role == "model":  # AI 메시지
-        with st.chat_message("ai", avatar="C:/Users/Sesame/YOLO_streamlit/chatbot/ai.jpg"):
+        with st.chat_message("ai", avatar=ai_avatar_path):
             st.markdown(content.parts[0].text)
     else:  # 사용자 메시지
-        with st.chat_message("user", avatar="C:/Users/Sesame/YOLO_streamlit/chatbot/dog.jpg"):
+        with st.chat_message("user", avatar=user_avatar_path):
             st.markdown(content.parts[0].text)
 
 if prompt := st.chat_input("메시지를 입력하세요."):    
-    with st.chat_message("user", avatar = 'C:/Users/Sesame/YOLO_streamlit/chatbot/dog.jpg'):
+    with st.chat_message("user", avatar =user_avatar_path):
         st.markdown(prompt)
-    with st.chat_message("ai", avatar="C:/Users/Sesame/YOLO_streamlit/chatbot/ai.jpg"): # avatat = 이모지 넣을 수 있음
+    with st.chat_message("ai", avatar=ai_avatar_path): # avatat = 이모지 넣을 수 있음
         response = st.session_state.chat_session.send_message(prompt)        
         st.markdown(response.text)
 # send_message(prompt)를 호출해 AI 모델의 응답을 생성하고, 
